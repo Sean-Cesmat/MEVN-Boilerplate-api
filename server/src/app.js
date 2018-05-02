@@ -20,5 +20,6 @@ db.once("open", function(callback){
 
 
 app.use('/posts', require('../routes/posts'));
+app.use('/auth', require('../routes/auth'));
 
 app.listen(process.env.PORT || 8081)

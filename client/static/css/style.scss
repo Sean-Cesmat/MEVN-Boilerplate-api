@@ -1,0 +1,110 @@
+/* ========== General ========== */
+html, body {
+  margin: 0px;
+  height: 100%;
+}
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
+input[type="text"], input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #58cba5;
+  font-size: 1rem;
+}
+nav .v--modal-box.v--modal form {
+  height: initial;
+}
+
+.tiny {
+  font-weight: bold;
+}
+#logged button {
+  border: none;
+  border-radius: 2px;
+}
+
+.purple-btn, button.purple-btn {
+  background: #9870f9;
+}
+.purple-btn:hover, button .purple-btn:hover, .purple-btn:focus, button .purple-btn:focus {
+  background: #835be4;
+}
+
+.main-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+/* ======= Toast ======= */
+.toasted.primary.default {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ========== NAV ========== */
+nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+  background: #58cba5;
+  h3 {
+    margin: 5px 0px;
+  }
+  .logo-link {
+    color: #fff;
+    &:hover, &:focus, &:visited {
+      color: #fff;
+    }
+  }
+  .username {
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  #logged {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      a {
+        margin-bottom: 1px;
+      }
+    }
+    input {
+      display: block;
+      margin: 5px 0px;
+    }
+    button.header-button {
+      background: rgba(255, 255, 255, 0.75);
+      border: none;
+      border-radius: 2px;
+      color: #333;
+      font-size: .7rem;
+      margin: 0px 4px;
+      padding: 0.65em .8em;
+    }
+    button.header-button:hover, button.header-button:focus {
+      background: rgb(255, 255, 255);
+    }
+  }
+}
+
+
+/* ========== FOOTER ========== */
+footer p {
+  margin: 10px 0px;
+}

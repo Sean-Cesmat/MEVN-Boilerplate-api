@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Post = require("../models/posts")
 
-router.get('/', (req, res) => {
-  Post.find({}, 'title description', function(error, posts) {
+router.get('/user/:userId', (req, res) => {
+  Post.find({author: req.params.userId}, 'title description', function(error, posts) {
     if (error) { console.log(error) }
     res.send({
       posts: posts
@@ -13,9 +13,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   var db = req.db;
+  var author = req.body.author;
   var title = req.body.title;
   var description = req.body.description;
   var new_post = new Post({
+    author: author,
     title: title,
     description: description
   })

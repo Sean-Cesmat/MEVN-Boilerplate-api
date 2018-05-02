@@ -1,8 +1,8 @@
 import Api from '@/services/Api'
 
 export default {
-  fetchPosts () {
-    return Api().get('posts')
+  fetchPosts (params) {
+    return Api().get('posts/user/' + params)
   },
   addPost (params) {
     return Api().post('posts', params)
@@ -15,5 +15,8 @@ export default {
   },
   deletePost (id) {
     return Api().delete('posts/' + id)
+  },
+  signUp () {
+    return Api().post('signup')
   }
 }

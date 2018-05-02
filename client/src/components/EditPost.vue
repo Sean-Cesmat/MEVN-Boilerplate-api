@@ -9,7 +9,7 @@
           <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
         </div>
         <div>
-          <button class="app_post_btn" @click="updatePost">Update</button>
+          <button class="purple-btn button app_post_btn" @click="updatePost">Update</button>
         </div>
       </div>
   </div>
@@ -59,7 +59,7 @@ export default {
   margin: 20px;
 }
 .app_post_btn {
-  background: #4d7ef7;
+  background: #9870f9;
   color: #fff;
   padding: 10px 80px;
   text-transform: uppercase;
