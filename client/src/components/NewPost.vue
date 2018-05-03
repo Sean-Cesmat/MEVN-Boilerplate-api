@@ -1,7 +1,7 @@
 <template>
   <div class="posts">
     <h1>Add Post</h1>
-      <div class="form grid-y  align-middle">
+      <div class="form grid-y align-middle">
         <input type="text" name="title" placeholder="TITLE" v-model="title">
         <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
         <button class="purple-btn button app_post_btn" @click="addPost">Add</button>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
+import Api from '@/services/Api'
 
 export default {
   name: 'NewPost',
@@ -22,12 +22,21 @@ export default {
   },
   methods: {
     async addPost () {
-      await PostsService.addPost({
+      Api().post('posts', {
         author: this.$store.state.user._id,
         title: this.title,
         description: this.description
+      }).then(result => {
+        this.$router.push({ name: 'Posts' })
+      }).catch(err => {
+        console.log(err.response)
       })
-      this.$router.push({ name: 'Posts' })
+      // await PostsService.addPost({
+      //   author: this.$store.state.user._id,
+      //   title: this.title,
+      //   description: this.description
+      // })
+      // this.$router.push({ name: 'Posts' })
     }
   }
 }

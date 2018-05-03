@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Api from '@/services/Api'
-// import axios from 'axios'
 import router from '@/router'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -24,6 +24,7 @@ const store = new Vuex.Store({
         this.state.jwt = result.data.token
         this.state.user = result.data.user
       }).catch(err => {
+        this.dispatch('errorToast', 'Oops something went wrong')
         console.log(err.response)
       })
     },
@@ -39,6 +40,7 @@ const store = new Vuex.Store({
         this.state.jwt = result.data.token
         this.state.user = result.data.user
       }).catch(err => {
+        this.dispatch('errorToast', 'Oops something went wrong')
         console.log(err.response)
       })
     },
@@ -51,14 +53,16 @@ const store = new Vuex.Store({
       if (!noToast) {
         this.dispatch('primaryToast', 'Logged Out')
       }
-      // Vue.toasted.show('Logged Out', {
-      //    theme: "primary",
-      //    position: "top-right",
-      //    duration : 3000
-      // })
     },
     primaryToast (context, message) {
       Vue.toasted.show(message, {
+        theme: 'primary',
+        position: 'top-right',
+        duration: 3000
+      })
+    },
+    errorToast (context, message) {
+      Vue.toasted.error(message, {
         theme: 'primary',
         position: 'top-right',
         duration: 3000

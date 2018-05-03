@@ -1,4 +1,3 @@
-
 <template>
   <div class="posts">
     <h1>Posts</h1>
@@ -12,12 +11,12 @@
           <td width="500">Description</td>
           <td width="150" align="center">Action</td>
         </tr>
-        <tr v-for="post in posts" :key="post.id">
+        <tr v-for="post, stateId in posts" :key="post._id">
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }" class="purple-btn button tiny">Edit</router-link>
-            <a href="#" @click="deletePost(post._id, post.id)" class="button tiny">Delete</a>
+            <a href="#" @click="deletePost(post._id, stateId)" class="button tiny">Delete</a>
           </td>
         </tr>
       </table>
@@ -30,7 +29,8 @@
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
+import Api from '@/services/Api'
+
 export default {
   name: 'posts',
   data () {
@@ -43,13 +43,20 @@ export default {
   },
   methods: {
     async getPosts () {
-      const response = await PostsService.fetchPosts(this.$store.state.user._id)
-      this.posts = response.data.posts
+      Api().get('posts/user/' + this.$store.state.user._id).then(result => {
+        this.posts = result.data.posts
+      }).catch(err => {
+        console.log(err.response)
+      })
     },
     async deletePost (id, stateId) {
-      await PostsService.deletePost(id)
-      this.posts.splice(stateId, 1)
-      this.$router.push({ name: 'Posts' })
+      console.log(stateId)
+      Api().delete('posts/' + id).then(result => {
+        this.posts.splice(stateId, 1)
+        this.$router.push({ name: 'Posts' })
+      }).catch(err => {
+        console.log(err.response)
+      })
     }
   }
 }

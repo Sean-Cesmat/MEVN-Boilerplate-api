@@ -1,22 +1,17 @@
 <template>
   <div class="posts">
     <h1>Edit Post</h1>
-      <div class="form">
-        <div>
-          <input type="text" name="title" placeholder="TITLE" v-model="title">
-        </div>
-        <div>
-          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
-        </div>
-        <div>
-          <button class="purple-btn button app_post_btn" @click="updatePost">Update</button>
-        </div>
+      <div class="form grid-y align-middle">
+        <input type="text" name="title" placeholder="TITLE" v-model="title">
+        <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
+        <button class="purple-btn button app_post_btn" @click="updatePost">Update</button>
       </div>
   </div>
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
+import Api from '@/services/Api'
+
 export default {
   name: 'EditPost',
   data () {
@@ -30,19 +25,36 @@ export default {
   },
   methods: {
     async getPost () {
-      const response = await PostsService.getPost({
-        id: this.$route.params.id
+      Api().get('posts/' + this.$route.params.id).then(result => {
+        this.title = result.data.title
+        this.description = result.data.description
+      }).catch(err => {
+        console.log(err.response)
       })
-      this.title = response.data.title
-      this.description = response.data.description
+
+      // const response = await PostsService.getPost({
+      //   id: this.$route.params.id
+      // })
+      // this.title = response.data.title
+      // this.description = response.data.description
     },
     async updatePost () {
-      await PostsService.updatePost({
+      Api().put('posts/' + this.$route.params.id, {
         id: this.$route.params.id,
         title: this.title,
         description: this.description
+      }).then(result => {
+        this.$router.push({ name: 'Posts' })
+      }).catch(err => {
+        console.log(err.response)
       })
-      this.$router.push({ name: 'Posts' })
+
+      // await PostsService.updatePost({
+      //   id: this.$route.params.id,
+      //   title: this.title,
+      //   description: this.description
+      // })
+      // this.$router.push({ name: 'Posts' })
     }
   }
 }

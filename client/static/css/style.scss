@@ -1,3 +1,7 @@
+$teal: #58cba5;
+$purple: #9870f9;
+$purple-dark: #835be4;
+
 /* ========== General ========== */
 html, body {
   margin: 0px;
@@ -14,7 +18,7 @@ main {
 
 input[type="text"], input[type="password"] {
   border: none;
-  border-bottom: 1px solid #58cba5;
+  border-bottom: 1px solid $teal;
   font-size: 1rem;
 }
 nav .v--modal-box.v--modal form {
@@ -30,10 +34,10 @@ nav .v--modal-box.v--modal form {
 }
 
 .purple-btn, button.purple-btn {
-  background: #9870f9;
+  background: $purple;
 }
 .purple-btn:hover, button .purple-btn:hover, .purple-btn:focus, button .purple-btn:focus {
-  background: #835be4;
+  background: $purple-dark;
 }
 
 .main-modal {
@@ -55,7 +59,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 15px;
-  background: #58cba5;
+  background: $teal;
   h3 {
     margin: 5px 0px;
   }
